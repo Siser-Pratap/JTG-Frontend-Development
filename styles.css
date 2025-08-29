@@ -1,0 +1,163 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: open-sans, sans-serif;
+  
+}
+
+body {
+  background-color: #f4f7fc;
+  color: #111;
+}
+
+header{
+    background-color:#fff;
+    overflow:hidden;
+}
+
+.navbar{
+    height: 20vh;
+    width:100vw;
+    display:flex;
+    gap:30vw;
+    justify-content:space-between;
+    align-items:center;
+    padding-left:5vw; 
+    padding-right:5vw;
+}
+
+.logo{
+    width:30vw;
+    height:76px;
+}
+
+.nav-links {
+    color:#111;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:32px;
+    width:40vw;
+    
+}
+
+.nav-links li a {
+    text-decoration:none;
+    color:#111;
+    font-weight:300;
+    padding:8px;
+}
+
+.nav-links li a:active{
+    background-color: #FFB400;
+    border-radius:6px;
+    
+}
+
+.hero{
+    margin-top:5px;
+    background-image: url('./assets/bg-img.png');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    width:auto;
+}
+
+.hero-section{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:0px;
+    padding-left:5vw;
+    padding-right:3vw;
+    height:80vh;
+    position:relative;
+    z-index:2;
+}
+
+.shapes img{
+    position:absolute;
+    z-index:1;
+}
+
+.ellipse-1 {
+    top: 30px;
+    right: 30px;
+    width: 20px;
+}
+
+.ellipse-2 {
+    bottom: 50px;
+    left: 150px;
+    width: 18px;
+}
+
+.ellipse-3 {
+    top: 60px;
+    left: 40px;
+    width: 22px;
+}
+
+.ellipse-4 {
+    bottom: 120px;
+    right: 80px;
+    width: 18px;
+}
+
+.rectangle {
+    top: 55%;
+    left: 45%;
+    width: 24px;
+}
+
+.hero-bg-img{
+    padding-top:7vh;
+}
+
+
+
+
+
+
+
+
+
+/* Cards Section */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: #555;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background-color: #1e3a8a;
+  color: #fff;
+  padding: 1rem;
+  margin-top: 2rem;
+}
