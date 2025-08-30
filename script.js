@@ -1,26 +1,40 @@
-// Sample data for cards
-const data = [
-  { title: "Feature 1", description: "This is the description for feature 1." },
-  { title: "Feature 2", description: "This is the description for feature 2." },
-  { title: "Feature 3", description: "This is the description for feature 3." },
-  { title: "Feature 4", description: "This is the description for feature 4." }
-];
+const container = document.getElementById("testimonialContainer");
+const dotsContainer = document.getElementById("dots");
+const cards = document.querySelectorAll(".testimonial-card");
 
-// Populate cards dynamically
-const cardsContainer = document.getElementById("cards-container");
+let index = 0;
+const visibleCards = 3; // Number of cards to show at once on desktop
+const totalCards = cards.length;
 
-data.forEach(item => {
-  const card = document.createElement("div");
-  card.classList.add("card");
-  card.innerHTML = `
-    <h3>${item.title}</h3>
-    <p>${item.description}</p>
-  `;
-  cardsContainer.appendChild(card);
-});
+// Create dots dynamically
+for (let i = 0; i < Math.ceil(totalCards - visibleCards + 1); i++) {
+  const dot = document.createElement("span");
+  dot.addEventListener("click", () => {
+    index = i;
+    updateCarousel();
+  });
+  dotsContainer.appendChild(dot);
+}
 
-// Button interaction
-const ctaBtn = document.getElementById("cta-btn");
-ctaBtn.addEventListener("click", () => {
-  alert("Button Clicked! 🎉");
-});
+// Update Carousel & Active Dot
+function updateCarousel() {
+  const cardWidth = cards[0].offsetWidth + 32; // card width + gap
+  container.scrollTo({
+    left: index * cardWidth,
+    behavior: "smooth",
+  });
+
+  const dots = dotsContainer.querySelectorAll("span");
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+  });
+}
+
+// Auto Slide Every 4s
+setInterval(() => {
+  index = (index + 1) % Math.ceil(totalCards - visibleCards + 1);
+  updateCarousel();
+}, 4000);
+
+// Initialize
+updateCarousel();
