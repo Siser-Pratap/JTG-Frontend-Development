@@ -1,40 +1,52 @@
-const container = document.getElementById("testimonialContainer");
-const dotsContainer = document.getElementById("dots");
-const cards = document.querySelectorAll(".testimonial-card");
+const testimonialContainer = document.getElementById('testimonialContainer');
+const testimonialCards = testimonialContainer.querySelectorAll('.testimonial-card');
+const dotsContainer = document.getElementById('dots');
 
-let index = 0;
-const visibleCards = 3; // Number of cards to show at once on desktop
-const totalCards = cards.length;
+let currentIndex = 0;
+const visibleCards = 3;
+const totalCards = testimonialCards.length;
+const maxIndex = Math.max(0, totalCards - visibleCards);
 
-// Create dots dynamically
-for (let i = 0; i < Math.ceil(totalCards - visibleCards + 1); i++) {
-  const dot = document.createElement("span");
-  dot.addEventListener("click", () => {
-    index = i;
-    updateCarousel();
-  });
-  dotsContainer.appendChild(dot);
+function scrollToIndex(index) {
+  const card = testimonialCards[index];
+  if (card) {
+    const left = card.offsetLeft - testimonialContainer.offsetLeft;
+    testimonialContainer.scrollTo({
+      left: left,
+      behavior: 'smooth'
+    });
+  }
+  updateDots(index);
 }
 
-// Update Carousel & Active Dot
-function updateCarousel() {
-  const cardWidth = cards[0].offsetWidth + 32; // card width + gap
-  container.scrollTo({
-    left: index * cardWidth,
-    behavior: "smooth",
-  });
+function createDots() {
+  dotsContainer.innerHTML = '';
+  const dotCount = 5;
+  for (let i = 0; i < dotCount; i++) {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      currentIndex = i;
+      scrollToIndex(currentIndex);
+    });
+    dotsContainer.appendChild(dot);
+  }
+}
 
-  const dots = dotsContainer.querySelectorAll("span");
+function updateDots(index) {
+  const dots = dotsContainer.querySelectorAll('.dot');
   dots.forEach((dot, i) => {
-    dot.classList.toggle("active", i === index);
+    dot.classList.toggle('active', i === index);
   });
 }
 
-// Auto Slide Every 4s
+
 setInterval(() => {
-  index = (index + 1) % Math.ceil(totalCards - visibleCards + 1);
-  updateCarousel();
+  currentIndex = (currentIndex + 1) > maxIndex ? 0 : currentIndex + 1;
+  scrollToIndex(currentIndex);
 }, 4000);
 
-// Initialize
-updateCarousel();
+
+createDots();
+scrollToIndex(currentIndex);
